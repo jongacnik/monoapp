@@ -1,0 +1,23 @@
+{
+  "name": "byo-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "byo example",
+  "main": "index.js",
+  "scripts": {
+    "start": "bankai start example-nanomorph --open",
+    "start-preact": "bankai start example-preact --uglify=false --open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bankai": "^7.1.1"
+  },
+  "dependencies": {
+    "bel": "^4.6.0",
+    "hyperx": "^2.3.0",
+    "nanomorph": "^4.0.4",
+    "nanomount": "^1.0.1",
+    "preact": "^8.1.0"
+  }
+}
