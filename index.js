@@ -34,6 +34,7 @@ function Byo (opts) {
     use: register,
     define: define,
     mount: mount,
+    router: router,
     route: route,
     start: start
   }
