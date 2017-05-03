@@ -3,9 +3,11 @@ var preact = require('preact')
 var hyperx = require('hyperx')
 var html = hyperx(preact.h)
 
-var app = byo()
-app.define('mount', handleMount)
-app.define('render', handleRender)
+var app = byo({
+  mount: handleMount,
+  render: handleRender
+})
+
 app.use(logger)
 app.use(countStore)
 app.route('/', mainView)

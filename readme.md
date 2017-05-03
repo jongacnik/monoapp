@@ -17,9 +17,11 @@ var html = require('bel')
 var nanomount = require('nanomount')
 var nanomorph = require('nanomorph')
 
-var app = byo()
-app.define('mount', handleMount)
-app.define('render', handleRender)
+var app = byo({
+  mount: handleMount,
+  render: handleRender
+})
+
 app.use(logger)
 app.use(countStore)
 app.route('/', mainView)
@@ -66,41 +68,39 @@ function countStore (state, emitter) {
 
 Under the hood, `byo` is essentially a fork of `choo`. At the moment, we'll keep `byo` in API parity with `choo`. **Please refer to the [choo documentation](https://github.com/yoshuawuyts/choo#api) for details on routing, events, and the architecture in general.** The only thing we need to document here is...
 
-### What's Different
+### Additional Options
 
-Because `byo` has no render methods, we need to define them ourselves!
+A couple additional options are provided for defining render methods, alongside all the supported `choo` [options](https://github.com/yoshuawuyts/choo#app--chooopts). While we refer to them as options, **`mount`** and **`render`** are **required since byo has no render methods by default.**
 
-### `app.define(action, callback([params]))`
-Define a function to call on an action. Available actions are `mount`, `render`, and `toString`. Each expects a function with slightly different parameters:
+### `opts.mount`
 
-**`mount`** *required
+**required** | Mount the tree onto the root. Typically you will return the `tree` or `root`. Example:
 
 ```js
-app.define('mount', function (tree, root) {
-  // mount tree onto root
-  // typically you will return tree/root
+function handleMount (tree, root) {
   nanomount(root, tree)
   return root
-})
+}
 ```
 
-**`render`** *required
+### `opts.render`
+
+**required** | Render the new tree. `tree`, `newTree`, and `root` are available for morphing. Example:
 
 ```js
-app.define('render', function (tree, newTree, root) {
-  // render the new tree
-  // tree, newTree, and root are available for morphing
+function handleRender (tree, newTree, root) {
   return nanomorph(tree, newTree)
-})
+}
 ```
 
-**`toString`**
+### `opts.toString`
+
+Convert html (or vdom) to string. You'll usually define this method for server rendering. Example:
 
 ```js
-app.define('toString', function (html) {
-  // convert html (or vdom) to string
+function handleToString (html) {
   return html.toString()
-})
+}
 ```
 
 ## Why does this exist?
@@ -121,16 +121,32 @@ var hyperx = require('hyperx')
 var html = hyperx(vdom.h)
 var rootNode
 
-app.define('mount', function (tree, root) {
+function handleMount (tree, root) {
   rootNode = vdom.create(tree)
   root.appendChild(rootNode)
   return tree
 })
 
-app.define('render', function (tree, newTree, root) {
+function handleRender (tree, newTree, root) {
   var patches = vdom.diff(tree, newTree)
   rootNode = vdom.patch(rootNode, patches)
   return newTree
+})
+```
+
+[Inferno](https://github.com/infernojs/inferno/)
+
+```js
+var Inferno = require('inferno')
+var hyperx = require('hyperx')
+var html = hyperx(require('inferno-create-element'))
+
+function handleMount (tree, root) {
+  return Inferno.render(tree, root)
+})
+
+function handleRender (tree, newTree, root) {
+  return Inferno.render(newTree, root)
 })
 ```
 
@@ -141,11 +157,11 @@ var preact = require('preact')
 var hyperx = require('hyperx')
 var html = hyperx(preact.h)
 
-app.define('mount', function (tree, root) {
+function handleMount (tree, root) {
   return preact.render(tree, root)
 })
 
-app.define('render', function (tree, newTree, root) {
+function handleRender (tree, newTree, root) {
   return preact.render(newTree, root, tree)
 })
 ```
@@ -158,11 +174,11 @@ var ReactDOM = require('react-dom')
 var hyperx = require('hyperx')
 var html = hyperx(React.createElement)
 
-app.define('mount', function (tree, root) {
+function handleMount (tree, root) {
   return ReactDOM.render(tree, root)
 })
 
-app.define('render', function (tree, newTree, root) {
+function handleRender (tree, newTree, root) {
   return ReactDOM.render(newTree, root)
 })
 ```
@@ -172,30 +188,14 @@ app.define('render', function (tree, newTree, root) {
 ```js
 var html = require('snabby')
 
-app.define('mount', function (tree, root) {
+function handleMount (tree, root) {
   html.update(root, tree)
   return tree
 })
 
-app.define('render', function (tree, newTree, root) {
+function handleRender (tree, newTree, root) {
   html.update(tree, newTree)
   return newTree
-})
-```
-
-[Inferno](https://github.com/infernojs/inferno/)
-
-```js
-var Inferno = require('inferno')
-var hyperx = require('hyperx')
-var html = hyperx(require('inferno-create-element'))
-
-app.define('mount', function (tree, root) {
-  return Inferno.render(tree, root)
-})
-
-app.define('render', function (tree, newTree, root) {
-  return Inferno.render(newTree, root)
 })
 ```
 

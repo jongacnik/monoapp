@@ -3,9 +3,11 @@ var html = require('bel')
 var nanomount = require('nanomount')
 var nanomorph = require('nanomorph')
 
-var app = byo()
-app.define('mount', handleMount)
-app.define('render', handleRender)
+var app = byo({
+  mount: handleMount,
+  render: handleRender
+})
+
 app.use(logger)
 app.use(countStore)
 app.route('/', mainView)

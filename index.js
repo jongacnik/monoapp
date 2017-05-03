@@ -25,14 +25,13 @@ function Byo (opts) {
   var root = null
   var tree = null
   var state = {}
-  var handleMount = null
-  var handleRender = null
-  var handleToString = null
+  var handleMount = opts.mount
+  var handleRender = opts.render
+  var handleToString = opts.toString
 
   return {
     toString: toString,
     use: register,
-    define: define,
     mount: mount,
     router: router,
     route: route,
@@ -50,12 +49,6 @@ function Byo (opts) {
 
   function register (cb) {
     cb(state, bus)
-  }
-
-  function define (action, cb) {
-    if (action === 'mount') handleMount = cb
-    if (action === 'render') handleRender = cb
-    if (action === 'toString') handleToString = cb
   }
 
   function start () {
