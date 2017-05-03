@@ -22,7 +22,7 @@
   "dependencies": {
     "assert": "^1.4.1",
     "document-ready": "^2.0.1",
-    "nanobus": "^2.2.2",
+    "nanobus": "^3.1.0",
     "nanohistory": "^1.0.0",
     "nanohref": "^1.0.0",
     "nanoraf": "^3.0.1",
