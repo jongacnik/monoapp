@@ -200,11 +200,6 @@ function handleRender (tree, newTree, root) {
 })
 ```
 
-## Todo 
-
-- [ ] Greenkeeper
-- [ ] Travis CI
-
 ## Fine Print
 
 Thanks [Yoshua Wuyts](https://github.com/yoshuawuyts) and the rest of the choo team (s/o [dat](https://datproject.org/)) for the continual awsm work 🙏
