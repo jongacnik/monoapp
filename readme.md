@@ -2,6 +2,7 @@
 
 [![API stability](https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square)](https://nodejs.org/api/documentation.html#documentation_stability_index)
 [![NPM version](https://img.shields.io/npm/v/byo.svg?style=flat-square)](https://npmjs.org/package/byo)
+[![Build Status](https://img.shields.io/travis/jongacnik/byo/master.svg?style=flat-square)](https://travis-ci.org/jongacnik/byo)
 [![Standard](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com)
 ![Size](https://img.shields.io/badge/size-2.89kB-yellow.svg?style=flat-square)
 
