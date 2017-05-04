@@ -1,5 +1,7 @@
 # byo
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jongacnik/byo.svg)](https://greenkeeper.io/)
+
 [![API stability](https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square)](https://nodejs.org/api/documentation.html#documentation_stability_index)
 [![NPM version](https://img.shields.io/npm/v/byo.svg?style=flat-square)](https://npmjs.org/package/byo)
 [![Standard](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com)
