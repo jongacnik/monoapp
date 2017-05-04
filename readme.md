@@ -4,6 +4,7 @@
 [![NPM version](https://img.shields.io/npm/v/byo.svg?style=flat-square)](https://npmjs.org/package/byo)
 [![Standard](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com)
 ![Size](https://img.shields.io/badge/size-2.89kB-yellow.svg?style=flat-square)
+[![Greenkeeper](https://badges.greenkeeper.io/jongacnik/byo.svg?style=flat-square)](https://greenkeeper.io/)
 
 `byo` or `bring your own` is like [choo](https://github.com/yoshuawuyts/choo) without a renderer.
 
