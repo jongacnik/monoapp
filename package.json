@@ -1,6 +1,6 @@
 {
   "name": "byo",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "byo is like choo without a renderer",
   "main": "index.js",
   "scripts": {
