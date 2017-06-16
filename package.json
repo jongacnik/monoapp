@@ -37,7 +37,7 @@
     "pretty-bytes": "^4.0.2",
     "pretty-bytes-cli": "^2.0.0",
     "standard": "^10.0.2",
-    "uglifyify": "^3.0.4",
+    "uglifyify": "^4.0.1",
     "uglifyjs": "^2.4.10",
     "unassertify": "^2.0.4"
   }
