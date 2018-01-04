@@ -30,7 +30,7 @@
     "nanorouter": "^2.0.0"
   },
   "devDependencies": {
-    "browserify": "^14.3.0",
+    "browserify": "^15.0.0",
     "bundle-collapser": "^1.2.1",
     "dependency-check": "^2.8.0",
     "node-zopfli": "^2.0.2",
