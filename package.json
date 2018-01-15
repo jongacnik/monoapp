@@ -32,7 +32,7 @@
   "devDependencies": {
     "browserify": "^14.3.0",
     "bundle-collapser": "^1.2.1",
-    "dependency-check": "^2.8.0",
+    "dependency-check": "^3.0.0",
     "node-zopfli": "^2.0.2",
     "pretty-bytes": "^4.0.2",
     "pretty-bytes-cli": "^2.0.0",
