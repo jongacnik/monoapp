@@ -1,7 +1,7 @@
 # monoapp
 
 [![API stability](https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square)](https://nodejs.org/api/documentation.html#documentation_stability_index)
-[![NPM version](https://img.shields.io/npm/v/monoapp.svg?style=flat-square)](https://npmjs.org/package/byo)
+[![NPM version](https://img.shields.io/npm/v/monoapp.svg?style=flat-square)](https://npmjs.org/package/monoapp)
 [![Standard](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com)
 ![Size](https://img.shields.io/badge/size-3.88kB-yellow.svg?style=flat-square)
 
@@ -15,7 +15,7 @@ In `monoapp`, we have removed the modules used to render the dom ([nanohtml](htt
 
 ## Example
 
-Clone of the [choo example](https://github.com/yoshuawuyts/choo#example), but we bring [nanohtml](https://github.com/choojs/nanohtml) and [nanomorph](https://github.com/choojs/nanomorph) ourselves.
+Clone of the [choo example](https://github.com/choojs/choo#example), but we bring [nanohtml](https://github.com/choojs/nanohtml) and [nanomorph](https://github.com/choojs/nanomorph) ourselves.
 
 ```js
 var html = require('nanohtml')
