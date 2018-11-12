@@ -1,0 +1,20 @@
+{
+  "name": "with-preact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo index.js -l -P"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "budo": "^11.5.0"
+  },
+  "dependencies": {
+    "choo-devtools": "^2.5.1",
+    "hyperx": "^2.4.0",
+    "preact": "^8.3.1"
+  }
+}

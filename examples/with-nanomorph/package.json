@@ -1,0 +1,20 @@
+{
+  "name": "with-nanomorph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo index.js -l -P"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "budo": "^11.5.0"
+  },
+  "dependencies": {
+    "choo-devtools": "^2.5.1",
+    "nanohtml": "^1.2.6",
+    "nanomorph": "^5.1.3"
+  }
+}
