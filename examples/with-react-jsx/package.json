@@ -1,0 +1,23 @@
+{
+  "name": "with-react-jsx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo index.js -l -P -- -t [ babelify --presets [ @babel/preset-react ] ]"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "babelify": "^10.0.0",
+    "budo": "^11.5.0"
+  },
+  "dependencies": {
+    "choo-devtools": "^2.5.1",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1"
+  }
+}

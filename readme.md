@@ -1,41 +1,37 @@
-# byo
+# monoapp
 
 [![API stability](https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square)](https://nodejs.org/api/documentation.html#documentation_stability_index)
-[![NPM version](https://img.shields.io/npm/v/byo.svg?style=flat-square)](https://npmjs.org/package/byo)
-[![Build Status](https://img.shields.io/travis/jongacnik/byo/master.svg?style=flat-square)](https://travis-ci.org/jongacnik/byo)
+[![NPM version](https://img.shields.io/npm/v/monoapp.svg?style=flat-square)](https://npmjs.org/package/byo)
 [![Standard](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com)
-![Size](https://img.shields.io/badge/size-2.89kB-yellow.svg?style=flat-square)
+![Size](https://img.shields.io/badge/size-3.88kB-yellow.svg?style=flat-square)
 
-`byo` or `bring your own` is like [choo](https://github.com/yoshuawuyts/choo) without a renderer.
+[choo](https://github.com/choojs/choo) architecture without a renderer. Bring-your-own view layer.
+
+## Overview
+
+`monoapp` is an opinionated fork of `choo`, a small frontend framework with a simple, functional architecture. Read-up on the [choo documentation](https://github.com/choojs/choo#api) for details on routing, events, and the architecture in general.
+
+In `monoapp`, we have removed the modules used to render the dom ([nanohtml](https://github.com/choojs/nanohtml) and [nanomorph](https://github.com/choojs/nanomorph)), and made these pluggable instead. This allows us to build apps using `choo` architecture, but render views and components however we would like. See the [examples directory](https://github.com/jongacnik/monoapp/tree/master/examples/) for using with [react](https://github.com/facebook/react), [lit-html](https://github.com/Polymer/lit-html), [nanomorph](https://github.com/choojs/nanomorph), etc.
 
 ## Example
 
-Clone of the [choo example](https://github.com/yoshuawuyts/choo#example), but we bring [bel](https://github.com/shama/bel), [nanomount](https://github.com/yoshuawuyts/nanomount), and [nanomorph](https://github.com/yoshuawuyts/nanomorph) ourselves.
+Clone of the [choo example](https://github.com/yoshuawuyts/choo#example), but we bring [nanohtml](https://github.com/choojs/nanohtml) and [nanomorph](https://github.com/choojs/nanomorph) ourselves.
 
 ```js
-var byo = require('byo')
-var html = require('bel')
-var nanomount = require('nanomount')
-var nanomorph = require('nanomorph')
+var html = require('nanohtml')
+var morph = require('nanomorph')
+var monoapp = require('monoapp')
+var devtools = require('choo-devtools')
 
-var app = byo({
-  mount: handleMount,
-  render: handleRender
+var app = monoapp({
+  mount: morph,
+  render: morph
 })
 
-app.use(logger)
+app.use(devtools())
 app.use(countStore)
 app.route('/', mainView)
 app.mount('body')
-
-function handleMount (tree, root) {
-  nanomount(root, tree)
-  return root
-}
-
-function handleRender (tree, newTree, root) {
-  return nanomorph(tree, newTree)
-}
 
 function mainView (state, emit) {
   return html`
@@ -50,12 +46,6 @@ function mainView (state, emit) {
   }
 }
 
-function logger (state, emitter) {
-  emitter.on('*', function (messageName, data) {
-    console.log('event', messageName, data)
-  })
-}
-
 function countStore (state, emitter) {
   state.count = 0
   emitter.on('increment', function (count) {
@@ -65,141 +55,68 @@ function countStore (state, emitter) {
 }
 ```
 
+You could also choose to define `mount` and `render` using a simple plugin, rather than passing as options:
+
+```js
+app.use(withNanomorph)
+
+function withNanomorph (state, emitter, app) {
+  app._mount = morph
+  app._render = morph
+}
+```
+
 ## API
 
-Under the hood, `byo` is essentially a fork of `choo`. At the moment, we'll keep `byo` in API parity with `choo`. **Please refer to the [choo documentation](https://github.com/yoshuawuyts/choo#api) for details on routing, events, and the architecture in general.** The only thing we need to document here is...
+The only items documented here are the methods to implement. These can be defined as options when creating a `monoapp` instance, or can be set with a plugin. Refer to the [choo documentation](https://github.com/choojs/choo#api) for anything related to app architecture (routing, state, and events).
 
-### Additional Options
+### `app._mount(tree, newTree, root)`*
 
-A couple additional options are provided for defining render methods, alongside all the supported `choo` [options](https://github.com/yoshuawuyts/choo#app--chooopts). While we refer to them as options, **`mount`** and **`render`** are **required since byo has no render methods by default.**
-
-### `opts.mount`
-
-**required** | Mount the tree onto the root. Typically you will return the `tree` or `root`. Example:
+Mount tree onto the root:
 
 ```js
-function handleMount (tree, root) {
-  nanomount(root, tree)
-  return root
-}
+app._mount = (tree, newTree, root) => nanomorph(tree, newTree)
 ```
 
-### `opts.render`
+### `app._render(tree, newTree, root)`*
 
-**required** | Render the new tree. `tree`, `newTree`, and `root` are available for morphing. Example:
+Render new tree:
 
 ```js
-function handleRender (tree, newTree, root) {
-  return nanomorph(tree, newTree)
-}
+app._render = (tree, newTree, root) => nanomorph(tree, newTree)
 ```
 
-### `opts.toString`
+### `app._toString(tree)`
 
-Convert html (or vdom) to string. You'll usually define this method for server rendering. Example:
+Convert tree to string. This method is useful for ssr:
 
 ```js
-function handleToString (html) {
-  return html.toString()
-}
+app._toString = (tree) => tree.toString()
 ```
+
+\*Required
+
+## Plugins
+
+Some plugins to use with `monoapp` which take care of common configs:
+
+- [monoapp-react](https://github.com/jongacnik/monoapp-react)
+- ~~monoapp-lit-html~~ soon
+- ~~monoapp-nanomorph~~ soon
+
+## More Examples
+
+- [with-react](https://github.com/jongacnik/monoapp/tree/master/examples/with-react)
+- [with-react-jsx](https://github.com/jongacnik/monoapp/tree/master/examples/with-react-jsx)
+- [with-lit-html](https://github.com/jongacnik/monoapp/tree/master/examples/with-lit-html)
+- [with-nanomorph](https://github.com/jongacnik/monoapp/tree/master/examples/with-nanomorph)
+- [with-preact](https://github.com/jongacnik/monoapp/tree/master/examples/with-preact)
+- [with-inferno](https://github.com/jongacnik/monoapp/tree/master/examples/with-inferno)
 
 ## Why does this exist?
 
-If you like `choo` use `choo`, it's rad.
+`choo` is really calm and we like to build apps using it. That said, sometimes `nanohtml` and `nanomorph` aren't the best tools for the job. We wanted to be able to build apps using `choo` architecture but swap out the view layer and make use of other component ecosystems when a project calls for it.
 
-But sometimes `bel`, `nanomount`, or `nanomorph` might not fit the needs of a project. Maybe you like virtual dom but you _still_ want to build your apps `choo`-style. `byo` is the back-pocket tool for those scenarios. I'm maintaining this project because I currently have a need for nested components which we can't quite yet pull off with [nanocomponent](https://github.com/yoshuawuyts/nanocomponent), so I opt for [preact](https://github.com/developit/preact) + [hyperx](https://github.com/substack/hyperx).
+## Notes
 
-## Renderers
-
-Here are some examples of renderers with tagged template string implementations you can `byo`:
-
-[virtual-dom](https://github.com/Matt-Esch/virtual-dom)
-
-```js
-var vdom = require('virtual-dom')
-var hyperx = require('hyperx')
-var html = hyperx(vdom.h)
-var rootNode
-
-function handleMount (tree, root) {
-  rootNode = vdom.create(tree)
-  root.appendChild(rootNode)
-  return tree
-})
-
-function handleRender (tree, newTree, root) {
-  var patches = vdom.diff(tree, newTree)
-  rootNode = vdom.patch(rootNode, patches)
-  return newTree
-})
-```
-
-[Inferno](https://github.com/infernojs/inferno/)
-
-```js
-var Inferno = require('inferno')
-var hyperx = require('hyperx')
-var html = hyperx(require('inferno-create-element'))
-
-function handleMount (tree, root) {
-  return Inferno.render(tree, root)
-})
-
-function handleRender (tree, newTree, root) {
-  return Inferno.render(newTree, root)
-})
-```
-
-[Preact](https://github.com/developit/preact)
-
-```js
-var preact = require('preact')
-var hyperx = require('hyperx')
-var html = hyperx(preact.h)
-
-function handleMount (tree, root) {
-  return preact.render(tree, root)
-})
-
-function handleRender (tree, newTree, root) {
-  return preact.render(newTree, root, tree)
-})
-```
-
-[React](https://github.com/facebook/react)
-
-```js
-var React = require('react')
-var ReactDOM = require('react-dom')
-var hyperx = require('hyperx')
-var html = hyperx(React.createElement)
-
-function handleMount (tree, root) {
-  return ReactDOM.render(tree, root)
-})
-
-function handleRender (tree, newTree, root) {
-  return ReactDOM.render(newTree, root)
-})
-```
-
-[Snabby](https://github.com/jamen/snabby)
-
-```js
-var html = require('snabby')
-
-function handleMount (tree, root) {
-  html.update(root, tree)
-  return tree
-})
-
-function handleRender (tree, newTree, root) {
-  html.update(tree, newTree)
-  return newTree
-})
-```
-
-## Fine Print
-
-Thanks [Yoshua Wuyts](https://github.com/yoshuawuyts) and the rest of the choo team (s/o [dat](https://datproject.org/)) for the continual awsm work 🙏
+`monoapp` is currently feature-matched to choo 6.13.1
