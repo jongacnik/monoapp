@@ -1,0 +1,22 @@
+{
+  "name": "with-vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo index.js -l -P -- -t [ babelify --presets [ @vue/babel-preset-jsx ] ]"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@vue/babel-preset-jsx": "^0.1.0",
+    "babelify": "^10.0.0",
+    "budo": "^11.5.0"
+  },
+  "dependencies": {
+    "choo-devtools": "^2.5.1",
+    "vue": "^2.5.17"
+  }
+}
