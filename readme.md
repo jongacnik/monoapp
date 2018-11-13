@@ -11,7 +11,7 @@
 
 `monoapp` is an opinionated fork of `choo`, a small frontend framework with a simple, functional architecture. Read-up on the [choo documentation](https://github.com/choojs/choo#api) for details on routing, events, and the architecture in general.
 
-In `monoapp`, we have removed the modules used to render the dom ([nanohtml](https://github.com/choojs/nanohtml) and [nanomorph](https://github.com/choojs/nanomorph)), and made these pluggable instead. This allows us to build apps using `choo` architecture, but render views and components however we would like. See the [examples directory](https://github.com/jongacnik/monoapp/tree/master/examples/) for using with [react](https://github.com/facebook/react), [lit-html](https://github.com/Polymer/lit-html), [nanomorph](https://github.com/choojs/nanomorph), etc.
+In `monoapp`, we have removed the modules used to render the dom ([nanohtml](https://github.com/choojs/nanohtml) and [nanomorph](https://github.com/choojs/nanomorph)), and made these pluggable instead. This allows us to build apps using `choo` architecture, but render views and components however we would like. See the [examples directory](https://github.com/jongacnik/monoapp/tree/master/examples/) for using with [react](https://github.com/jongacnik/monoapp/tree/master/examples/with-react), [lit-html](https://github.com/jongacnik/monoapp/tree/master/examples/with-lit-html), [vue](https://github.com/jongacnik/monoapp/tree/master/examples/with-vue-jsx), [nanomorph](https://github.com/jongacnik/monoapp/tree/master/examples/with-nanomorph), etc.
 
 ## Example
 
@@ -109,6 +109,7 @@ Some plugins to use with `monoapp` which take care of common configs:
 - [with-react](https://github.com/jongacnik/monoapp/tree/master/examples/with-react)
 - [with-react-jsx](https://github.com/jongacnik/monoapp/tree/master/examples/with-react-jsx)
 - [with-lit-html](https://github.com/jongacnik/monoapp/tree/master/examples/with-lit-html)
+- [with-vue-jsx](https://github.com/jongacnik/monoapp/tree/master/examples/with-vue-jsx)
 - [with-nanomorph](https://github.com/jongacnik/monoapp/tree/master/examples/with-nanomorph)
 - [with-preact](https://github.com/jongacnik/monoapp/tree/master/examples/with-preact)
 - [with-inferno](https://github.com/jongacnik/monoapp/tree/master/examples/with-inferno)
