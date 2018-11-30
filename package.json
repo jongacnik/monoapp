@@ -23,7 +23,7 @@
   "author": "Jon Gacnik <jon@folderstudio.com>",
   "license": "MIT",
   "dependencies": {
-    "document-ready": "^2.0.1",
+    "document-ready": "^2.0.2",
     "nanobus": "^4.2.0",
     "nanohref": "^3.0.0",
     "nanoquery": "^1.1.0",
