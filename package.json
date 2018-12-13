@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "document-ready": "^2.0.1",
-    "nanobus": "^4.2.0",
+    "nanobus": "^4.4.0",
     "nanohref": "^3.0.0",
     "nanoquery": "^1.1.0",
     "nanoraf": "^3.0.0",
