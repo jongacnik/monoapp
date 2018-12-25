@@ -36,7 +36,7 @@
   "devDependencies": {
     "browserify": "^16.2.3",
     "bundle-collapser": "^1.3.0",
-    "dependency-check": "^3.2.1",
+    "dependency-check": "^3.3.0",
     "discify": "^1.6.3",
     "pretty-bytes-cli": "^2.0.0",
     "spok": "^0.9.1",
