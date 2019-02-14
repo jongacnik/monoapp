@@ -41,7 +41,7 @@
     "pretty-bytes-cli": "^2.0.0",
     "spok": "^0.9.1",
     "standard": "^12.0.1",
-    "tape": "^4.9.1",
+    "tape": "^4.10.1",
     "tinyify": "^2.4.3",
     "uglifyify": "^5.0.1",
     "uglifyjs": "^2.4.11",
