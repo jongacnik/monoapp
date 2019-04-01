@@ -26,7 +26,7 @@
     "document-ready": "^2.0.1",
     "nanobus": "^4.2.0",
     "nanohref": "^3.0.0",
-    "nanoquery": "^1.1.0",
+    "nanoquery": "^1.3.0",
     "nanoraf": "^3.0.0",
     "nanorouter": "^3.0.1",
     "nanotiming": "^7.0.0",
